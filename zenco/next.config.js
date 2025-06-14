@@ -16,7 +16,7 @@ const config = {
         pathname: "/api/upload/**", // Đảm bảo đường dẫn này được bao gồm
       },
     ],
-    domains: ["localhost", "zencomex.com", new URL(process.env.NEXT_PUBLIC_API_URL).hostname],
+    domains: ["localhost", "zencomex.com"],
   },
 
   webpack(config, { isServer }) {

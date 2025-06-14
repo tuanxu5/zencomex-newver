@@ -1,0 +1,214 @@
+/* styles/globals.css */
+/* @import url("https://cdnjs.cloudflare.com/ajax/libs/tiptap/2.0.0-beta.21/tiptap.css"); */
+
+.ProseMirror {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 1000px;
+}
+
+.ProseMirror:focus {
+  outline: none;
+}
+/* styles/globals.css */
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+  font-size: 16px;
+}
+
+canvas {
+  position: fixed; /* Keep the canvas fixed in the viewport */
+  top: 0;
+  left: 0;
+  pointer-events: none; /* Ensure the canvas doesn't interfere with other elements */
+  width: 100vw; /* Ensure canvas covers the full width of the viewport */
+  height: auto; /* Ensure canvas covers the full height of the viewport */
+}
+
+/* styles/globals.css */
+.editor-container {
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.editor-input {
+  min-height: 200px;
+  outline: none;
+}
+
+.editor-placeholder {
+  color: #888;
+}
+
+.tiptap-editor-disabled img {
+  display: block;
+  margin: 0 auto;
+}
+
+.align-left {
+  text-align: left;
+}
+.align-center {
+  text-align: center;
+}
+.align-right {
+  text-align: right;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+p {
+  text-align: left; /* Mặc định */
+}
+
+/* Có thể thay đổi các kiểu căn chỉnh */
+p.align-center {
+  text-align: center;
+}
+
+p.align-right {
+  text-align: right;
+}
+
+p.align-justify {
+  text-align: justify;
+}
+
+/* Custom Scrollbar for WebKit Browsers (Chrome, Safari) */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 10px;
+  border: 3px solid #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Custom Scrollbar for Firefox */
+body {
+  scrollbar-width: thin;
+  scrollbar-color: #888 #f1f1f1;
+  padding-right: 0 !important;
+  font-size: 16px;
+  font-family: "Arial", serif;
+}
+
+/* Custom scrollbar track */
+body::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Custom scrollbar thumb */
+body::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 10px;
+  border: 3px solid #f1f1f1;
+}
+
+.tiptap table {
+  border-collapse: collapse;
+  margin: 0;
+  overflow: hidden;
+  table-layout: fixed;
+  width: 100%;
+}
+
+.tiptap table td,
+.tiptap table th {
+  border: 1px solid rgba(61, 37, 20, 0.12);
+  box-sizing: border-box;
+  min-width: 1em;
+  padding: 6px 8px;
+  position: relative;
+  vertical-align: top;
+}
+
+.tiptap table td > *,
+.tiptap table th > * {
+  margin-bottom: 0;
+}
+
+.tiptap table th {
+  background-color: rgba(61, 37, 20, 0.05);
+  font-weight: bold;
+  text-align: left;
+}
+
+.tiptap table .selectedCell:after {
+  background: rgba(61, 37, 20, 0.12);
+  content: "";
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  pointer-events: none;
+  position: absolute;
+  z-index: 2;
+}
+
+.tiptap table .column-resize-handle {
+  background-color: var(--purple);
+  bottom: -2px;
+  pointer-events: none;
+  position: absolute;
+  right: -2px;
+  top: 0;
+  width: 4px;
+}
+
+.tiptap .tableWrapper {
+  margin: 1.5rem 0;
+  overflow-x: auto;
+}
+
+&.resize-cursor {
+  cursor: ew-resize;
+  cursor: col-resize;
+}
+
+.fadeInSection {
+  opacity: 0;
+  transform: translateY(10vh);
+  visibility: hidden;
+  transition: opacity 1200ms ease-out, transform 600ms ease-out, visibility 1200ms ease-out;
+}
+
+.isVisibleFadeInSection {
+  opacity: 1;
+  transform: none;
+  visibility: visible;
+}
+
+.slick-track {
+  width: max-content !important;
+}
+
+@media (max-width: 600px) {
+  html {
+    font-size: 14px;
+  }
+  body {
+    font-size: 14px;
+  }
+}

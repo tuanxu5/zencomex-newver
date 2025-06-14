@@ -1,0 +1,24 @@
+{
+    "development": {
+        "username": "root",
+        "password": "Ptuylht090821",
+        "database": "zencomex",
+        "host": "127.0.0.1",
+        "port": "3306",
+        "dialect": "mysql"
+    },
+    "test": {
+        "username": "root",
+        "password": "",
+        "database": "zencomex",
+        "host": "localhost",
+        "dialect": "mysql"
+    },
+    "production": {
+        "username": "zencomex",
+        "password": "zenco2020",
+        "database": "zencomex",
+        "host": "127.0.0.1",
+        "dialect": "mysql"
+    }
+}

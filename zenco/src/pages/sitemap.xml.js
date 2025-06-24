@@ -35,7 +35,7 @@ export const getServerSideProps = async ({ res }) => {
       ${pageMain
         .concat(urls.data.DT)
         ?.map(({ url, changefreq, priority }) => {
-          const cleanUrl = url?.trim?.(); // loại bỏ khoảng trắng
+          const cleanUrl = url?.trim?.();
           return `
           <url>
             <loc>${`${baseUrl}${cleanUrl}`}</loc>

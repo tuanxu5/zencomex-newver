@@ -33,20 +33,20 @@ export const getServerSideProps = async ({ res }) => {
             xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
             xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
       ${pageMain
-        .concat(urls.data.DT)
-        ?.map(({ url, changefreq, priority }) => {
-          const cleanUrl = url?.trim?.();
+        .concat(urls.data.DT?.filter(({ url }) => typeof url === "string" && url.trim() !== ""))
+        .map(({ url, changefreq, priority }) => {
+          const cleanUrl = url?.replace(/\s+/g, "").trim();
           return `
-          <url>
-            <loc>${`${baseUrl}${cleanUrl}`}</loc>
-            <changefreq>${changefreq}</changefreq>
-            <priority>${priority}</priority>
-          </url>
-        `;
+            <url>
+              <loc>${`${baseUrl}${cleanUrl}`}</loc>
+              <changefreq>${changefreq || "daily"}</changefreq>
+              <priority>${priority || 0.7}</priority>
+            </url>
+          `;
         })
         .join("")}
     </urlset>`;
-
+    console.log(xml);
     // Gửi phản hồi
     res.write(xml);
     res.end();

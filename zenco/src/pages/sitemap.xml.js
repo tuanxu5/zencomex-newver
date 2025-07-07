@@ -46,7 +46,7 @@ export const getServerSideProps = async ({ res }) => {
         })
         .join("")}
     </urlset>`;
-    console.log(xml);
+
     // Gửi phản hồi
     res.write(xml);
     res.end();

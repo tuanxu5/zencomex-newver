@@ -1,6 +1,6 @@
 import { Box, Container, Typography } from "@mui/material";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
@@ -9,49 +9,21 @@ import { BoxEmpty } from "../../components/view-layout/box-empty";
 import axiosInstance, { BASE_URL } from "../../utils/axios";
 
 const HomeSlidePartner = () => {
+  const containerRef = useRef(null);
   const [filesPartner, setFilesPartner] = useState([]);
+  const [slidesToShow, setSlidesToShow] = useState(8); // fallback ban đầu
 
   const sliderSettings = {
-    slidesToShow: 8,
+    slidesToShow: slidesToShow,
     slidesToScroll: 1,
     rows: 1,
     infinite: true,
     speed: 500,
-    autoplay: true,
+    autoplay: false,
     autoplaySpeed: 2000,
     draggable: true,
     swipeToSlide: true,
     arrows: false,
-    responsive: [
-      {
-        breakpoint: 1200,
-        settings: {
-          slidesToShow: 6,
-          slidesToScroll: 1,
-        },
-      },
-      {
-        breakpoint: 900,
-        settings: {
-          slidesToShow: 4,
-          slidesToScroll: 1,
-        },
-      },
-      {
-        breakpoint: 780,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 1,
-        },
-      },
-      {
-        breakpoint: 580,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-        },
-      },
-    ],
   };
 
   // Fetch images of partners
@@ -77,6 +49,22 @@ const HomeSlidePartner = () => {
     };
 
     fetchData();
+  }, []);
+
+  useEffect(() => {
+    const updateSlidesToShow = () => {
+      if (containerRef.current) {
+        const containerWidth = containerRef.current.offsetWidth;
+        const itemWidth = 210; // px
+        const newSlides = Math.floor(containerWidth / itemWidth) || 1;
+        setSlidesToShow(newSlides);
+      }
+    };
+
+    updateSlidesToShow();
+
+    window.addEventListener("resize", updateSlidesToShow);
+    return () => window.removeEventListener("resize", updateSlidesToShow);
   }, []);
 
   return (
@@ -115,6 +103,7 @@ const HomeSlidePartner = () => {
           ĐỐI TÁC CỦA CHÚNG TÔI
         </Typography>
         <Box
+          ref={containerRef}
           sx={{
             mt: 5,
           }}
@@ -143,7 +132,7 @@ const HomeSlidePartner = () => {
                     <Image
                       src={`${BASE_URL}/upload/${item.image}`}
                       alt={item.title}
-                      width={500}
+                      width={200}
                       height={70}
                       style={{
                         width: "100%",

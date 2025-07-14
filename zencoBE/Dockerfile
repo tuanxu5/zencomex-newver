@@ -10,8 +10,11 @@ COPY package.json package-lock.json ./
 # Cài đặt các phụ thuộc
 RUN npm install
 
-# Sao chép toàn bộ mã nguồn vào container (CHỈ làm sau khi cài xong package)
+# Sao chép toàn bộ mã nguồn vào container
 COPY . .
 
-# Chạy ứng dụng backend
-CMD ["npm", "start"]
+# Copy ảnh mặc định vào thư mục tạm (bên ngoài volume)
+COPY ./public/upload/baiviet /tmp/default-images
+
+# CMD duy nhất: copy ảnh mặc định nếu chưa có và start app
+CMD ["sh", "-c", "mkdir -p /app/public/upload/baiviet && cp -n -r /tmp/default-images/* /app/public/upload/baiviet && npm start"]

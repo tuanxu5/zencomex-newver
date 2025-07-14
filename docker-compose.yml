@@ -26,7 +26,7 @@ services:
       NODE_ENV: production
       REACT_URL: https://zencomex.com/
     volumes:
-      - backend-data:/app/public/upload
+      - ./zencoBE/uploads:/app/public/upload
     networks:
       - app-network
     depends_on:

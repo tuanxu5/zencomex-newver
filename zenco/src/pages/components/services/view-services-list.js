@@ -64,8 +64,7 @@ const ViewServicesList = ({ item, setBreadcrumbsList, tag }) => {
       }}
     >
       <Grid container spacing={5}>
-
-        <Grid item xs={12} sm={12} lg={3.5} >
+        <Grid item xs={12} sm={12} lg={3.5}>
           <Box sx={{ display: "flex", flexDirection: "column", gap: "48px" }}>
             <TextAnimationFadeUp>
               <Stack>
@@ -79,7 +78,6 @@ const ViewServicesList = ({ item, setBreadcrumbsList, tag }) => {
             </TextAnimationFadeUp>
           </Box>
         </Grid>
-
 
         <Grid item xs={12} sm={12} lg={8.5}>
           <Box>
@@ -127,15 +125,17 @@ const ViewServicesList = ({ item, setBreadcrumbsList, tag }) => {
                         <NextLink href={paths.detail(general.alias)} legacyBehavior>
                           <Stack direction="column" width="100%">
                             <Card sx={{ boxShadow: "none !important", borderRadius: "8px !important" }}>
-                              <Box sx={{
-                                height: "100%",
-                                width: "100%",
-                                objectFit: "center",
-                                objectPosition: "center",
-                                transition: "transform 0.4s ease-in-out",
-                                boxShadow: "none !important",
-                                aspectRatio: 1,
-                              }}>
+                              <Box
+                                sx={{
+                                  height: "100%",
+                                  width: "100%",
+                                  objectFit: "center",
+                                  objectPosition: "center",
+                                  transition: "transform 0.4s ease-in-out",
+                                  boxShadow: "none !important",
+                                  aspectRatio: 1,
+                                }}
+                              >
                                 <LazyLoadedImage
                                   src={isValidUrl(general.image) ? general.image : `/upload/baiviet/${general.image}`}
                                   alt={`Hình ảnh ${general.title}`}
@@ -205,7 +205,7 @@ const ViewServicesList = ({ item, setBreadcrumbsList, tag }) => {
           )}
         </Grid>
       </Grid>
-    </Container >
+    </Container>
   );
 };
 

@@ -40,9 +40,10 @@ const ViewNewLists = ({ item, setBreadcrumbsList, tag, keywords }) => {
   ];
 
   const defaultPage = {
-    pageSize: 20,
+    pageSize: 10,
     pageIndex: 1,
   };
+
   const router = useRouter();
   const [page, setPage] = useState(defaultPage);
   const [totalPage, setTotalPage] = useState(2);
@@ -55,6 +56,7 @@ const ViewNewLists = ({ item, setBreadcrumbsList, tag, keywords }) => {
   const mdDown = useMediaQuery((theme) => theme.breakpoints.down("md"));
   const handlePageChange = (value) => {
     setPage({ ...page, pageIndex: value });
+    handleFetchNews();
   };
 
   const checkId = () => {
@@ -115,11 +117,15 @@ const ViewNewLists = ({ item, setBreadcrumbsList, tag, keywords }) => {
   }, [JSON.stringify(item), tag, keywords]);
 
   const searchDebounce = useDebounce(searchValue, 500);
+
   useEffect(() => {
     setPage(defaultPage);
     handleFetchNews();
   }, [searchDebounce]);
 
+  useEffect(() => {
+    handleFetchNews();
+  }, [page.pageIndex]);
   return (
     <>
       <Container

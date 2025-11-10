@@ -79,23 +79,25 @@ const checkPassword = (inputPassword, hashPassword) => {
 };
 
 const handleUserLogin = async (rawData) => {
-  const { valueLogin, password } = rawData;
+  const { email, password } = rawData;
   try {
-    let user = await db.User.findOne({
+    let user = await db.table_user.findOne({
       where: {
-        [Op.or]: [{ email: valueLogin }, { phone: valueLogin }],
+        [Op.or]: [{ username: email }, { email: email }],
       },
+      attributes: { exclude: ["GroupId"] },
     });
+    console.log(user);
     if (user) {
       let isCorrectPassword = checkPassword(password, user.password);
       if (isCorrectPassword) {
         //test roles
-        let roles = await getGroupWithRoles(user);
+        // let roles = await getGroupWithRoles(user);
 
         let payload = {
           email: user.email,
           username: user.username,
-          groupWithRoles: roles,
+          // groupWithRoles: roles,
         };
         let token = createJWT(payload);
         return {
@@ -104,7 +106,7 @@ const handleUserLogin = async (rawData) => {
           EF: "",
           DT: {
             access_token: token,
-            groupWithRoles: roles,
+            // groupWithRoles: roles,
             email: user.email,
             username: user.username,
           },
@@ -117,7 +119,9 @@ const handleUserLogin = async (rawData) => {
       EF: 1,
       DT: "",
     };
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 module.exports = {

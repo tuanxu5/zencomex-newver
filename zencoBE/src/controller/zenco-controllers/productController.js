@@ -4,7 +4,6 @@ const productService = require("../../service/zenco-services/productService");
 const listCategories = async (req, res) => {
   try {
     let data = await productService.listCategories(req);
-    console.log(data);
     return res.status(200).json({
       EM: data.EM,
       EC: data.EC,

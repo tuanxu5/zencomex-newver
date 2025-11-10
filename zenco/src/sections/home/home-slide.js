@@ -41,15 +41,30 @@ const HomeSlide = () => {
           {slides.map((slide, index) => (
             <div
               key={index}
-              className="embla__slide"
+              className="embla__slide flex justify-center"
               style={{
                 flex: "0 0 100%",
                 minWidth: "0",
-                width: "100%",
-                height: renderHeight(),
+                display: "flex",
+                justifyContent: "center",
               }}
             >
-              <LazyLoadedImageBanner src={`/upload/${slide.link}`} />
+              <div
+                style={{
+                  width: "100%",
+                  maxWidth: "1920px",
+                  height: renderHeight(),
+                }}
+              >
+                <LazyLoadedImageBanner
+                  src={`/upload/${slide.link}`}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                  }}
+                />
+              </div>
             </div>
           ))}
         </div>

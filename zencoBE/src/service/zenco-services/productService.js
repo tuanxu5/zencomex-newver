@@ -69,7 +69,6 @@ const listCategories = async (req) => {
           };
         })
       );
-      console.log(newData);
       return {
         EM: "get list categories successfully",
         EC: 0,

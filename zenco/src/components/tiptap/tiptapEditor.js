@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 //icon
 import CodeIcon from "@mui/icons-material/Code";
@@ -108,6 +108,9 @@ const StyledEditorContent = styled(EditorContent)(({ height }) => ({
     cursor: "pointer",
   },
   img: {
+    maxWidth: "100% !important",
+  },
+  "div img": {
     maxWidth: "100% !important",
   },
   iframe: {

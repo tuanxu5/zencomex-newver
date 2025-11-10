@@ -113,6 +113,9 @@ const StyledEditorContent = styled(EditorContent)(({ height }) => ({
   "div img": {
     maxWidth: "100% !important",
   },
+  "div:has(img)": {
+    maxWidth: "100% !important",
+  },
   iframe: {
     margin: "0 auto",
   },

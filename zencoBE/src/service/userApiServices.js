@@ -3,7 +3,7 @@ const db = require("../models");
 
 const getAllUser = async () => {
   try {
-    const users = await db.User.findAll({
+    const users = await db.table_user.findAll({
       attributes: ["id", "username", "email", "phone", "sex", "address"],
       include: { model: db.Group, attributes: ["id", "name", "description"] },
 
@@ -28,7 +28,7 @@ const getAllUser = async () => {
 };
 const getUserPanigation = async (page, limit) => {
   try {
-    const { count, rows } = await db.User.findAndCountAll({
+    const { count, rows } = await db.table_user.findAndCountAll({
       attributes: ["id", "username", "email", "phone", "sex", "address"],
       include: { model: db.Group, attributes: ["id", "name", "description"] },
       offset: (page - 1) * limit,
@@ -69,7 +69,7 @@ const hashPassword = (pass) => {
 const createNewUser = async (data) => {
   const passHash = hashPassword(data.password);
   try {
-    let res = await db.User.create({ ...data, password: passHash });
+    let res = await db.table_user.create({ ...data, password: passHash });
     return {
       EM: "create user successfully",
       EC: 0,
@@ -89,11 +89,11 @@ const createNewUser = async (data) => {
 const updateUser = async (data) => {
   const { id, body } = data;
   try {
-    let user = await db.User.findOne({
+    let user = await db.table_user.findOne({
       where: { id: id },
     });
     if (user) {
-      await db.User.update({ ...body, password: user.password }, { where: { id: id } });
+      await db.table_user.update({ ...body, password: user.password }, { where: { id: id } });
       return {
         EM: "Update user successfully",
         EC: 0,
@@ -120,7 +120,7 @@ const updateUser = async (data) => {
 
 const deleteUser = async (id) => {
   try {
-    let user = await db.User.findOne({
+    let user = await db.table_user.findOne({
       where: { id: id },
     });
     if (user) {

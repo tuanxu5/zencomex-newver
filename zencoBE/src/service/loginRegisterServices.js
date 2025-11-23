@@ -6,7 +6,7 @@ const { getGroupWithRoles } = require("../service/JWTService");
 const { createJWT } = require("../middleware/JWTActions");
 
 const checkEmailExist = async (userEmail) => {
-  let user = await db.User.findOne({
+  let user = await db.table_user.findOne({
     where: { email: userEmail },
   });
   if (user) {
@@ -15,7 +15,7 @@ const checkEmailExist = async (userEmail) => {
   return false;
 };
 const checkPhoneExist = async (userPhone) => {
-  let user = await db.User.findOne({
+  let user = await db.table_user.findOne({
     where: { phone: userPhone },
   });
   if (user) {
@@ -54,7 +54,7 @@ const registerNewUser = async (rawUserData) => {
     const passHash = hashPassword(password);
 
     // create new user
-    await db.User.create({
+    await db.table_user.create({
       email: email,
       phone: phone,
       password: passHash,

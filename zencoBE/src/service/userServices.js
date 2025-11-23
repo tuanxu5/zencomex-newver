@@ -13,14 +13,14 @@ const checkPassword = (pass, passHash) => {
 };
 const createUser = async (email, password, username) => {
   const passHash = hashPassword(password);
-  await db.User.create({
+  await db.table_user.create({
     email: email,
     password: passHash,
     username: username,
   });
 };
 const updateUser = async (email, username, userId) => {
-  await db.User.update(
+  await db.table_user.update(
     {
       email: email,
       username: username,
@@ -31,20 +31,20 @@ const updateUser = async (email, username, userId) => {
       },
     }
   );
-  //   return await db.User.save();
+  //   return await db.table_user.save();
 };
 const deleteUser = async (userId) => {
-  await db.User.destroy({
+  await db.table_user.destroy({
     where: {
       id: userId,
     },
   });
-  //   return await db.User.save();
+  //   return await db.table_user.save();
 };
 
 const getAllUser = async (req, res) => {
   // test relationship
-  let newUser = await db.User.findOne({
+  let newUser = await db.table_user.findOne({
     where: { id: 1 },
     attributes: ["id", "username", "email"],
     include: db.Group,
@@ -61,11 +61,11 @@ const getAllUser = async (req, res) => {
   //   nest: true,
   // });
 
-  const users = await db.User.findAll();
+  const users = await db.table_user.findAll();
   return users;
 };
 const getUserById = async (userId) => {
-  const user = await db.User.findOne({
+  const user = await db.table_user.findOne({
     where: {
       id: userId,
     },

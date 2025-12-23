@@ -75,8 +75,8 @@ const initApiRoutes = (app) => {
 
   router.use("/news-category", newsCategoryRoutes);
 
-  router.use("/test-haha", (req, res) => {
-    return res.send("test troi");
+  router.use("/test-ne", (req, res) => {
+    return res.send("test kkk");
   });
 
   return app.use("/api", router);

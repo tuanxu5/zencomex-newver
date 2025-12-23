@@ -1,7 +1,7 @@
 const Sequelize = require("sequelize");
 
 module.exports = function (sequelize, DataTypes) {
-  return sequelize.define(
+  const table_user = sequelize.define(
     "table_user",
     {
       id: {
@@ -83,6 +83,10 @@ module.exports = function (sequelize, DataTypes) {
           return Math.floor((now.getTime() + utc7Offset) / 1000); // Convert to seconds
         },
       },
+      groupId: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
     },
     {
       sequelize,
@@ -98,4 +102,10 @@ module.exports = function (sequelize, DataTypes) {
       ],
     }
   );
+
+  table_user.associate = function (models) {
+    table_user.belongsTo(models.Group, { foreignKey: "groupId" });
+  };
+
+  return table_user;
 };

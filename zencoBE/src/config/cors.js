@@ -6,7 +6,9 @@ const configCors = (app) => {
   app.use(function (req, res, next) {
     // Website you wish to allow to connect
     const origin = req.headers.origin;
-    if (allowedOrigins.includes(origin)) {
+    const isAllowed = allowedOrigins.includes(origin);
+
+    if (isAllowed) {
       res.setHeader("Access-Control-Allow-Origin", origin);
     }
 
@@ -21,8 +23,10 @@ const configCors = (app) => {
     res.setHeader("Access-Control-Allow-Credentials", true);
 
     if (req.method === "OPTIONS") {
-      res.setHeader("Access-Control-Allow-Origin", origin);
-      return res.sendStatus(200);
+      if (isAllowed) {
+        return res.sendStatus(200);
+      }
+      return res.sendStatus(403);
     }
     // Pass to next layer of middleware
     next();
